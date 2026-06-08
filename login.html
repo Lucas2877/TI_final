@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Login - API DummyJSON</title>
+</head>
+<body>
+
+  <h1>Login </h1>
+
+  <!-- Formulario de login -->
+  <div id="zonaLogin">
+    <h2>Iniciar sesión</h2>
+
+    <label>Usuario:</label>
+    <input type="text" id="usuario" placeholder="ingrese su usuario">
+    <br>
+
+    <label>Contraseña:</label>
+    <input type="password" id="password" placeholder="ingrese su Contraseña">
+    <br>
+
+    <button id="btnLogin">Ingresar</button>
+
+    <p id="mensaje"></p>
+    
+  </div>
+
+  <!-- Zona que se ve después de loguearse -->
+  <div id="zonaBienvenida" hidden>
+    <h2>¡Bienvenido/a!</h2>
+    
+    <p><b>Nombre:</b> <span id="nombre"></span></p>
+    <p><b>Email:</b> <span id="email"></span></p>
+    <button id="btnSalir">Cerrar sesión</button>
+  </div>
+
+  
+  <script src="js/main.js"></script>
+</body>
+</html>

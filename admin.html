@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administrador</title>
+</head>
+
+<body>
+
+    <h1>Panel de Administrador</h1>
+
+    <a href="index.html">
+        Volver al inicio
+    </a>
+
+    <button id="btnCerrarSesion">
+        Cerrar sesión
+    </button>
+
+    <hr>
+
+    <h2>Agregar noticia</h2>
+
+    <form id="formNoticia">
+
+        <label>
+            Título
+        </label>
+
+        <input
+            type="text"
+            required
+            id="titulo"
+        >
+
+        <br><br>
+
+        <label>
+            Descripción
+        </label>
+        <input type="text" id="descripcion">
+        <br><br/>
+
+        <label>
+            URL Imagen
+        </label>
+
+        <input
+            type="url"
+            required
+            id="imagen"
+        >
+
+        <br><br>
+
+        <button type="submit" id="btnGuardarNoticia">
+            Guardar noticia
+        </button>
+    
+    </form>
+    
+    <hr>
+
+    <h2>Noticias cargadas</h2>
+    <div id="listaNoticias"></div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

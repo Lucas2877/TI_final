@@ -9,15 +9,19 @@
 </head>
 <body> 
     <div class="dolarhoy"></div>
-    <button type="button">Presione para poner el Modo Oscuro </button>
+    <button type="button" id = "bot-oscuro">Presione para poner el Modo Oscuro </button>
+    <button id="btnLoguearse">iniciar sesión</button>
     <h1>Portal de noticias</h1>
+    <h1>Cotización del Dólar Hoy</h1>
+
+    <p id="cotizacion-actual">Cargando cotización...</p>
     <main>
   <article>
     <h2>Revelaron el gesto que tuvo Messi con los empleados del predio de AFA tras ganar el Mundial 2022: “Casi un departamento”</h2>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd8VKLFdHxJrP7NOCtlP8OaY3s9utrUao1iA&s"alt="Messi posando con un utilero de AFA">
     <p>Gerardo Salorio, ex preparador físico de la Selección, contó la actitud que tuvo el astro rosarino con los premios por conseguir la tercera estrella
     </p>
-  </article>
+  </article> 
     <article>
     <h2>Las entradas para el Mundial 2026 son las más caras de la historia: cuánto sale ver a Argentina</h2>
     <img src="https://www.infobae.com/resizer/v2/BI42W7HBPVHOFMQZ4AJFNTXNI4.jpg?auth=22450d54598fa6d9c1a34ee9a74dccfe7d4f2a2176bd7bc1974c9e92b153e42f&smart=true&width=992&height=558&quality=85" alt="imagen copa del mundo ">
@@ -44,30 +48,12 @@
       <img src="https://www.infobae.com/resizer/v2/NNHGH34EWVE7JNI5PWQ2B35V3E.JPG?auth=ae65c55ea24f0a44e0c7a053df95de08a762e94db9c88a519ca4fe0a0616e10e&smart=true&width=992&height=660&quality=85" alt="presidente Bolivia juntos a funcionarios americanos">
       <p>El vicesecretario de Estado estadounidense, Christopher Landau, respaldó al presidente Rodrigo Paz frente a las protestas y denunció que fuerzas “antiinstitucionales” buscan desestabilizar al país</p>
     </article>
+    <div id="noticiasNuevas"></div>
 </main>
-  <footer>
-  <form>
-    <label for="nombreUsuario">Nombre:</label>
-      <input type="text">
-  
-    <label for="nombreUsuario">Contraseña:</label>
-    <input type="password">
 
-    <br>
-    <button type="button">Presione para enviar </button>
-  </form>
-  <br>
-    <p><strong>Solo Adiminstradores</strong></p>
-  <hr>
-
-  <div class="agregarnoticia">
-    <button type="button">Presione para agregar, modificar o eliminar noticia </button>
-  </div>
-  <br>
-  <section>Administrador</section>
-</footer>
 
     
-    <script src="CSS/style.css"></script>
+    <script src="JS/main.js"></script>
 </body>
 </html>
+>

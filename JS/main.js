@@ -7,9 +7,9 @@ if (botonOscuro) {
 
     // Verifica si el modo oscuro está activo para cambiar el texto
     if (document.body.classList.contains("dark-mode")) {
-      botonOscuro.textContent = "Presione para cambiar al color estandar";
+      botonOscuro.textContent = "🌞";
     } else {
-      botonOscuro.textContent = "Presione para poner el Modo Oscuro";
+      botonOscuro.textContent = "🌚";
     }
   });
 }

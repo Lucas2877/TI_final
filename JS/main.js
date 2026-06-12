@@ -273,7 +273,7 @@ function mostrarNoticiasIndex() {
         contenedor.innerHTML += `
             <article>
                 <h2>${noticia.titulo}</h2>
-                <img src="${noticia.imagen}" width="300">
+                <img src="${noticia.imagen}">
                 <p>${noticia.descripcion}</p>
             </article>
         `;
@@ -295,23 +295,14 @@ function eliminarNoticia(index) {
 
 let noticiaEnEdicion = null;
 
-function editarNoticia(index) {
-
-    let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-
-    let noticia = noticias[index];
-
-    document.getElementById("titulo").value = noticia.titulo;
-    document.getElementById("descripcion").value = noticia.descripcion;
-    document.getElementById("imagen").value = noticia.imagen;
-
-    noticiaEnEdicion = index;
-}
-
 window.editarNoticia = editarNoticia;
 window.eliminarNoticia = eliminarNoticia;
 
-document.getElementById("formNoticia").addEventListener("submit", function(e) {
+  const formNoticia = document.getElementById("formNoticia");
+
+    if (formNoticia) 
+
+    formNoticia.addEventListener("submit", function(e) {
     e.preventDefault();
     
     let titulo = document.getElementById("titulo").value.trim();
@@ -345,9 +336,51 @@ document.getElementById("formNoticia").addEventListener("submit", function(e) {
     mostrarNoticiasAdmin();
 });
 
-document.getElementById("btnCerrarSesion").addEventListener("click", function() {
-    localStorage.removeItem("usuario");
-    window.location.href = "index.html";
-});
+const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener("click", function() {
+        localStorage.removeItem("token");
+        window.location.href = "index.html";
+    });
+}
 
 mostrarNoticiasAdmin();
+const linkAdmin = document.getElementById("linkAdmin");
+
+if (linkAdmin) {
+
+  linkAdmin.addEventListener("click", function(e) {
+
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "login.html";
+    }
+
+  });
+
+}
+if (localStorage.getItem("modo") === "oscuro") {
+  document.body.classList.add("dark-mode");
+  botonOscuro.textContent = "☀️";
+}
+if (botonOscuro) {
+  botonOscuro.addEventListener("click", (e) => {
+    // Alterna la clase en el body
+    document.body.classList.toggle("dark-mode");
+
+    // Verifica si el modo oscuro está activo para cambiar el texto
+    if (document.body.classList.contains("dark-mode")) {
+      botonOscuro.textContent = "☀️";
+      localStorage.setItem("modo", "oscuro");
+    } else {
+      botonOscuro.textContent = "🌙";
+      localStorage.setItem("modo", "claro");
+    }
+  });
+}

@@ -1,16 +1,20 @@
 let botonOscuro = document.getElementById("bot-oscuro");
 
+// Al cargar la página, aplicar el modo guardado
+if (localStorage.getItem("modoOscuro") === "true") {
+  document.body.classList.add("dark-mode");
+  if (botonOscuro) botonOscuro.textContent = "🌞";
+}
+
 if (botonOscuro) {
   botonOscuro.addEventListener("click", (e) => {
-    // Alterna la clase en el body
     document.body.classList.toggle("dark-mode");
 
-    // Verifica si el modo oscuro está activo para cambiar el texto
-    if (document.body.classList.contains("dark-mode")) {
-      botonOscuro.textContent = "Presione para cambiar al color estandar";
-    } else {
-      botonOscuro.textContent = "Presione para poner el Modo Oscuro";
-    }
+    const estaOscuro = document.body.classList.contains("dark-mode");
+    botonOscuro.textContent = estaOscuro ? "🌞" : "🌚";
+
+    // Guardar preferencia
+    localStorage.setItem("modoOscuro", estaOscuro);
   });
 }
 
@@ -19,6 +23,21 @@ const btnSalir = document.getElementById("btnSalir");
 const inputUsuario = document.getElementById("usuario");
 const inputPassword = document.getElementById("password");
 const mensaje = document.getElementById("mensaje");
+const togglePassword = document.getElementById("togglePassword");
+
+if (togglePassword && inputPassword) {
+  togglePassword.addEventListener("click", function () {
+
+    if (inputPassword.type === "password") {
+      inputPassword.type = "text";
+      togglePassword.textContent = "🙈";
+    } else {
+      inputPassword.type = "password";
+      togglePassword.textContent = "👁️";
+    }
+
+  });
+}
 
 const zonaLogin = document.getElementById("zonaLogin");
 const zonaBienvenida = document.getElementById("zonaBienvenida");
@@ -258,7 +277,7 @@ function mostrarNoticiasIndex() {
         contenedor.innerHTML += `
             <article>
                 <h2>${noticia.titulo}</h2>
-                <img src="${noticia.imagen}" width="300">
+                <img src="${noticia.imagen}">
                 <p>${noticia.descripcion}</p>
             </article>
         `;
@@ -280,23 +299,14 @@ function eliminarNoticia(index) {
 
 let noticiaEnEdicion = null;
 
-function editarNoticia(index) {
-
-    let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-
-    let noticia = noticias[index];
-
-    document.getElementById("titulo").value = noticia.titulo;
-    document.getElementById("descripcion").value = noticia.descripcion;
-    document.getElementById("imagen").value = noticia.imagen;
-
-    noticiaEnEdicion = index;
-}
-
 window.editarNoticia = editarNoticia;
 window.eliminarNoticia = eliminarNoticia;
 
-document.getElementById("formNoticia").addEventListener("submit", function(e) {
+  const formNoticia = document.getElementById("formNoticia");
+
+    if (formNoticia) 
+
+    formNoticia.addEventListener("submit", function(e) {
     e.preventDefault();
     
     let titulo = document.getElementById("titulo").value.trim();
@@ -330,9 +340,39 @@ document.getElementById("formNoticia").addEventListener("submit", function(e) {
     mostrarNoticiasAdmin();
 });
 
-document.getElementById("btnCerrarSesion").addEventListener("click", function() {
-    localStorage.removeItem("usuario");
-    window.location.href = "index.html";
-});
+const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+if (btnCerrarSesion) {
+    btnCerrarSesion.addEventListener("click", function() {
+        localStorage.removeItem("token");
+        window.location.href = "index.html";
+    });
+}
 
 mostrarNoticiasAdmin();
+const linkAdmin = document.getElementById("linkAdmin");
+
+if (linkAdmin) {
+
+  linkAdmin.addEventListener("click", function(e) {
+
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "login.html";
+    }
+
+  });
+
+}
+const btnIrAdmin = document.getElementById("btnIrAdmin");
+
+if (btnIrAdmin) {
+  btnIrAdmin.addEventListener("click", function() {
+    window.location.href = "admin.html";
+  });
+}

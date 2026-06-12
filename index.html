@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>portal</title>
    
 </head>
 <body> 
-  
+  <nav>
+  <a href="index.html">Inicio</a>
+  <a href="admin.html" id="linkAdmin">Administrador</a>
+</nav>
+
     <div class="dolarhoy"></div>
-    <button type="button" id = "bot-oscuro">Presione para poner el Modo Oscuro </button>
+    <button type="button" id = "bot-oscuro">🌚</button>
     <button id="btnLoguearse">iniciar sesión</button>
     <h1>Portal de noticias</h1>
     <h1>Cotización del Dólar Hoy</h1>
@@ -21,10 +28,10 @@
     <main>
   <article>
     <h2>Revelaron el gesto que tuvo Messi con los empleados del predio de AFA tras ganar el Mundial 2022: “Casi un departamento”</h2>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd8VKLFdHxJrP7NOCtlP8OaY3s9utrUao1iA&s"alt="Messi posando con un utilero de AFA">
+    <img src="https://www.ole.com.ar/images/2023/02/03/DKvJawqNY_720x0__1.jpg"alt="Messi posando con un utilero de AFA">
     <p>Gerardo Salorio, ex preparador físico de la Selección, contó la actitud que tuvo el astro rosarino con los premios por conseguir la tercera estrella
     </p>
-  </article>
+  </article> 
     <article>
     <h2>Las entradas para el Mundial 2026 son las más caras de la historia: cuánto sale ver a Argentina</h2>
     <img src="https://www.infobae.com/resizer/v2/BI42W7HBPVHOFMQZ4AJFNTXNI4.jpg?auth=22450d54598fa6d9c1a34ee9a74dccfe7d4f2a2176bd7bc1974c9e92b153e42f&smart=true&width=992&height=558&quality=85" alt="imagen copa del mundo ">
@@ -54,12 +61,24 @@
     <div id="noticiasNuevas"></div>
 </main> 
     <script src="JS/main.js"></script>
-</body>
-<footer>
-  <h3>Contactanos</h3>
-   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ePKHPL3dmtk_NuCMX0G1JOrAL4_y6ZQNtQ&s" width="25" height="30"> 
-   <span>Comunicate con el +54 9 3462 34 9293</span>
 
+</body>
+<footer class="footer">
+
+  <div class="footer-columna">
+    <h3>📰 Portal de Noticias</h3>
+    <p>Información actualizada sobre economía, deportes y actualidad.</p>
+  </div>
+  <div class="footer-columna">
+    <h3>📞 Contacto</h3>
+    <p>+54 9 3462 34 9293</p>
+    <p>portalnoticias@gmail.com</p>
+  </div>
 </footer>
+
+<div class="footer-copy">
+  ©️ 2025 Portal de Noticias - Todos los derechos reservados
+</div>
+
 </html>
  

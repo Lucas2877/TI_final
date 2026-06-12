@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <title>Demo Login - API DummyJSON</title>
   <link rel="stylesheet" href="CSS/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  
+  <button type="button" id="bot-oscuro">🌚</button>
+  
   <!-- Formulario de login -->
   <div id="zonaLogin">
     <h2>Iniciar sesión</h2>
@@ -15,7 +21,13 @@
     <br>
 
     <label>Contraseña:</label>
-    <input type="password" id="password" placeholder="ingrese su Contraseña">
+
+  <div class="password-container">
+  <input type="password" id="password" placeholder="ingrese su Contraseña">
+  <button type="button" id="togglePassword">👁️</button>
+  </div>
+
+    <br>
     <br>
 
     <button id="btnLogin">Ingresar</button>
@@ -31,6 +43,7 @@
     <p><b>Nombre:</b> <span id="nombre"></span></p>
     <p><b>Email:</b> <span id="email"></span></p>
     <button id="btnSalir">Cerrar sesión</button>
+    <button id="btnIrAdmin">Panel Admin</button>
   </div>
 
   

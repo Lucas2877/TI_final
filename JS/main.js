@@ -1,16 +1,20 @@
 let botonOscuro = document.getElementById("bot-oscuro");
 
+// Al cargar la página, aplicar el modo guardado
+if (localStorage.getItem("modoOscuro") === "true") {
+  document.body.classList.add("dark-mode");
+  if (botonOscuro) botonOscuro.textContent = "🌞";
+}
+
 if (botonOscuro) {
   botonOscuro.addEventListener("click", (e) => {
-    // Alterna la clase en el body
     document.body.classList.toggle("dark-mode");
 
-    // Verifica si el modo oscuro está activo para cambiar el texto
-    if (document.body.classList.contains("dark-mode")) {
-      botonOscuro.textContent = "🌞";
-    } else {
-      botonOscuro.textContent = "🌚";
-    }
+    const estaOscuro = document.body.classList.contains("dark-mode");
+    botonOscuro.textContent = estaOscuro ? "🌞" : "🌚";
+
+    // Guardar preferencia
+    localStorage.setItem("modoOscuro", estaOscuro);
   });
 }
 
@@ -365,22 +369,10 @@ if (linkAdmin) {
   });
 
 }
-if (localStorage.getItem("modo") === "oscuro") {
-  document.body.classList.add("dark-mode");
-  botonOscuro.textContent = "☀️";
-}
-if (botonOscuro) {
-  botonOscuro.addEventListener("click", (e) => {
-    // Alterna la clase en el body
-    document.body.classList.toggle("dark-mode");
+const btnIrAdmin = document.getElementById("btnIrAdmin");
 
-    // Verifica si el modo oscuro está activo para cambiar el texto
-    if (document.body.classList.contains("dark-mode")) {
-      botonOscuro.textContent = "☀️";
-      localStorage.setItem("modo", "oscuro");
-    } else {
-      botonOscuro.textContent = "🌙";
-      localStorage.setItem("modo", "claro");
-    }
+if (btnIrAdmin) {
+  btnIrAdmin.addEventListener("click", function() {
+    window.location.href = "admin.html";
   });
 }

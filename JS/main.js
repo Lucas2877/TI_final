@@ -1,3 +1,7 @@
+function cerrarSesion() {
+  localStorage.removeItem("token");
+  window.location.href = "index.html";
+}
 let botonOscuro = document.getElementById("bot-oscuro");
 
 // Al cargar la página, aplicar el modo guardado
@@ -152,33 +156,52 @@ function mostrarBienvenida(data) {
 
 // cerrar sesión
 if (btnSalir) {
-
-  btnSalir.addEventListener("click", function () {
-
-    localStorage.removeItem("token");
-
-    if (zonaLogin) {
-      zonaLogin.hidden = false;
-    }
-
-    if (zonaBienvenida) {
-      zonaBienvenida.hidden = true;
-    }
-
-    if (mensaje) {
-      mensaje.textContent = "";
-    }
-
-    window.location.href = "index.html";
-  });
-
+  btnSalir.addEventListener("click", cerrarSesion);
 }
 const btnLoguearse = document.getElementById("btnLoguearse");
+const saludoUsuario = document.getElementById("saludoUsuario");
+const nombreUsuario = document.getElementById("nombreUsuario");
+const btnCerrarSesionIndex = document.getElementById("btnCerrarSesionIndex");
 
 if (btnLoguearse) {
   btnLoguearse.addEventListener("click", function () {
-    window.location.href ="login.html";
+    window.location.href = "login.html";
   });
+}
+
+const tokenIndex = localStorage.getItem("token");
+
+// Por defecto, asumimos que NO hay sesión
+if (saludoUsuario) saludoUsuario.hidden = true;
+if (btnCerrarSesionIndex) btnCerrarSesionIndex.hidden = true;
+if (btnLoguearse) btnLoguearse.hidden = false;
+
+if (tokenIndex && btnLoguearse && saludoUsuario && btnCerrarSesionIndex) {
+
+  fetch("https://dummyjson.com/auth/me", {
+    method: "GET",
+    headers: { "Authorization": "Bearer " + tokenIndex }
+  })
+    .then(function (respuesta) {
+      if (!respuesta.ok) throw new Error("Token inválido");
+      return respuesta.json();
+    })
+    .then(function (data) {
+      btnLoguearse.hidden = true;
+      saludoUsuario.hidden = false;
+      btnCerrarSesionIndex.hidden = false;
+      nombreUsuario.textContent = data.firstName;
+    })
+    .catch(function () {
+      localStorage.removeItem("token");
+      saludoUsuario.hidden = true;
+      btnCerrarSesionIndex.hidden = true;
+      btnLoguearse.hidden = false;
+    });
+}
+
+if (btnCerrarSesionIndex) {
+  btnCerrarSesionIndex.addEventListener("click", cerrarSesion);
 }
 const cotizacionActual = document.getElementById("cotizacion-actual");
 const cotizacionActual1 = document.getElementById("cotizacion-actual1");
@@ -264,15 +287,53 @@ function mostrarNoticiasAdmin() {
     });
 }
 
+
+const noticiasFijas = [
+  {
+    titulo: "Revelaron el gesto que tuvo Messi con los empleados del predio de AFA tras ganar el Mundial 2022: “Casi un departamento”",
+    imagen: "https://www.ole.com.ar/images/2023/02/03/DKvJawqNY_720x0__1.jpg",
+    descripcion: "Gerardo Salorio, ex preparador físico de la Selección, contó la actitud que tuvo el astro rosarino con los premios por conseguir la tercera estrella"
+  },
+  {
+    titulo: "Las entradas para el Mundial 2026 son las más caras de la historia: cuánto sale ver a Argentina",
+    imagen: "https://www.infobae.com/resizer/v2/BI42W7HBPVHOFMQZ4AJFNTXNI4.jpg?auth=22450d54598fa6d9c1a34ee9a74dccfe7d4f2a2176bd7bc1974c9e92b153e42f&smart=true&width=992&height=558&quality=85",
+    descripcion: "Las cifras para conseguir un lugar en los estadios de la Copa del Mundo superan todos los registros anteriores, según una investigación de The Economist, y generan un debate sobre el acceso y el ambiente en los partidos"
+  },
+  {
+    titulo: "El Banco Central acumuló 90 jornadas consecutivas con compras de dólares: sumó más de USD 8.300 millones en 2026",
+    imagen: "https://www.infobae.com/resizer/v2/FZIRB5AB5JCOJDWXZH3QII2UWA.JPG?auth=8b0f85374ce99d85f7d31e54fc37cd1462b8a4e9f88980a86ce564721c1275bb&smart=true&width=992&height=659&quality=85",
+    descripcion: "La autoridad monetaria compró USD 144 millones este martes y superó el 83% del piso de la meta anual de adquisición de divisas. Las reservas anotaron una leve suba"
+  },
+  {
+    titulo: "Disparidad regional: cuánto pagan de luz y gas los usuarios de cada provincia y por qué la brecha es tan grande",
+    imagen: "https://www.infobae.com/resizer/v2/5WEEJ7CX3ZB25GXZSVWXI3ZMUQ.jpg?auth=9d82882bed26811dd99dd22f7e7b1c991d34965d23875a5f546e5e50f9803815&smart=true&width=992&height=558&quality=85",
+    descripcion: "Las tarifas varían considerablemente entre las diferentes jurisdicciones, incluso dentro de un mismo segmento de hogares"
+  },
+  {
+    titulo: "Tomar más de tres tazas de café al día podría triplicar el riesgo de daño renal en algunas personas, según un nuevo estudio",
+    imagen: "https://www.infobae.com/resizer/v2/EU3PVM2CUFBNRI2CBXEHUREXJY.png?auth=09fe9ce4dcbf7492d44a1e841e87dab135073b75b32a06ea9618c8813fc75900&smart=true&width=992&height=543&quality=85",
+    descripcion: "La investigación identificó que el riesgo aumenta especialmente en personas con una variante genética que ralentiza el metabolismo de la cafeína y potencia sus efectos en el organismo"
+  },
+  {
+    titulo: "EEUU alertó sobre un \"golpe de Estado en marcha\" en Bolivia impulsado por sectores ligados al crimen organizado",
+    imagen: "https://www.infobae.com/resizer/v2/NNHGH34EWVE7JNI5PWQ2B35V3E.JPG?auth=ae65c55ea24f0a44e0c7a053df95de08a762e94db9c88a519ca4fe0a0616e10e&smart=true&width=992&height=660&quality=85",
+    descripcion: "El vicesecretario de Estado estadounidense, Christopher Landau, respaldó al presidente Rodrigo Paz frente a las protestas y denunció que fuerzas “antiinstitucionales” buscan desestabilizar al país"
+  }
+];
+
 function mostrarNoticiasIndex() {
 
     const contenedor = document.getElementById("noticiasNuevas");
 
     if (!contenedor) return;
 
-    let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+    contenedor.innerHTML = "";
 
-    noticias.forEach(function(noticia) {
+    let noticiasGuardadas = JSON.parse(localStorage.getItem("noticias")) || [];
+
+    let todasLasNoticias = noticiasFijas.concat(noticiasGuardadas);
+
+    todasLasNoticias.forEach(function(noticia) {
 
         contenedor.innerHTML += `
             <article>
@@ -343,10 +404,7 @@ window.eliminarNoticia = eliminarNoticia;
 const btnCerrarSesion = document.getElementById("btnCerrarSesion");
 
 if (btnCerrarSesion) {
-    btnCerrarSesion.addEventListener("click", function() {
-        localStorage.removeItem("token");
-        window.location.href = "index.html";
-    });
+  btnCerrarSesion.addEventListener("click", cerrarSesion);
 }
 
 mostrarNoticiasAdmin();

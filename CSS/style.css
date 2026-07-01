@@ -240,38 +240,6 @@ article:hover {
   cursor: pointer;
 }
 
-.dolarhoy {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 25px 0;
-  flex-wrap: wrap;
-}
-
-#cotizacion-actual,
-#cotizacion-actual1 {
-  background-color: white;
-  padding: 20px;
-  border-radius: 12px;
-  min-width: 280px;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #27ae60;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-#cotizacion-actual:hover,
-#cotizacion-actual1:hover {
-  transform: translateY(-5px);
-  transition: 0.3s;
-}
-
-body.dark-mode #cotizacion-actual,
-body.dark-mode #cotizacion-actual1 {
-  background-color: #2a2a2a;
-  color: #4cd964;
-}
 
 .password-container {
   display: flex;
@@ -476,17 +444,6 @@ nav a:hover {
   color: #4cd964;
 }
 
-/* HERO DOLAR */
-
-.hero-dolar {
-  text-align: center;
-  padding: 30px;
-}
-
-.hero-dolar h2 {
-  margin-bottom: 20px;
-}
-
 /* FOOTER */
 
 .footer {
@@ -633,4 +590,45 @@ body.dark-mode h2 {
   position: absolute;
   top: 10px;
   right: 60px;
+}
+/* TICKER COTIZACIONES */
+.ticker-wrapper {
+  background-color: #1a1a2e;
+  overflow: hidden;
+  padding: 10px 0;
+  white-space: nowrap;
+  display: flex;
+}
+
+.ticker-contenido {
+  display: flex;
+}
+
+.ticker-loop {
+  display: inline-block;
+  animation: ticker 40s linear infinite;
+  padding-right: 40px;
+}
+
+.ticker-item {
+  display: inline-block;
+  margin: 0 40px;
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+.ticker-item span {
+  color: #4cd964;
+  margin-left: 8px;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+body.dark-mode .ticker-wrapper {
+  background-color: #0d0d1a;
 }

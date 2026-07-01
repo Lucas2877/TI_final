@@ -203,39 +203,7 @@ if (tokenIndex && btnLoguearse && saludoUsuario && btnCerrarSesionIndex) {
 if (btnCerrarSesionIndex) {
   btnCerrarSesionIndex.addEventListener("click", cerrarSesion);
 }
-const cotizacionActual = document.getElementById("cotizacion-actual");
-const cotizacionActual1 = document.getElementById("cotizacion-actual1");
 
-obtenerCompraCotizacion();
-obtenerVentaCotizacion();
-
-function obtenerCompraCotizacion() {
-    fetch("https://api.bluelytics.com.ar/v2/latest")
-        .then(respuesta => respuesta.json())
-        .then(datos => {
-            cotizacionActual.textContent =
-                `El valor de compra del dólar blue hoy es de $${datos.blue.value_buy}`;
-        })
-        .catch(() => {
-            cotizacionActual.textContent =
-                "No se pudo obtener la cotización.";
-        });
-}
-
-function obtenerVentaCotizacion() {
-    fetch("https://api.bluelytics.com.ar/v2/latest")
-        .then(respuesta => respuesta.json())
-        .then(datos => {
-            cotizacionActual1.textContent =
-                `El valor de venta del dólar blue hoy es de $${datos.blue.value_sell}`;
-        })
-        .catch(() => {
-            cotizacionActual1.textContent =
-                "No se pudo obtener la cotización.";
-        });
-}
-
-obtenerVentaCotizacion();
 // FORMULARIO DEL ADMIN
 
 function editarNoticia(index) {
@@ -434,3 +402,54 @@ if (btnIrAdmin) {
     window.location.href = "admin.html";
   });
 }
+
+//BARRA DE MONEDAS//
+
+function cargarTicker() {
+  const apiKey = "9551f1133fa6213b27214563";
+
+  const promiseBluelytics = fetch("https://api.bluelytics.com.ar/v2/latest")
+    .then(r => r.json());
+
+  const promiseExchange = fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`)
+    .then(r => r.json());
+
+  Promise.all([promiseBluelytics, promiseExchange])
+    .then(function([blue, exchange]) {
+
+      const usdToArs = exchange.conversion_rates.ARS;
+
+      const items = [
+        { nombre: "🇺🇸 💵 DÓLAR BLUE", compra: blue.blue.value_buy, venta: blue.blue.value_sell },
+        { nombre: "🇺🇸 💵 DÓLAR OFICIAL", compra: blue.oficial.value_buy, venta: blue.oficial.value_sell },
+        { nombre: "🇪🇺 💶 EURO BLUE", compra: blue.blue_euro.value_buy, venta: blue.blue_euro.value_sell },
+        { nombre: "🇪🇺 💶 EURO OFICIAL", compra: blue.oficial_euro.value_buy, venta: blue.oficial_euro.value_sell },
+        { nombre: "🇬🇧 💷 LIBRA ESTERLINA", compra: (usdToArs / exchange.conversion_rates.GBP).toFixed(2), venta: ((usdToArs / exchange.conversion_rates.GBP) * 1.02).toFixed(2) },
+        { nombre: "🇧🇷 🪙 REAL BRASILEÑO", compra: (usdToArs / exchange.conversion_rates.BRL).toFixed(2), venta: ((usdToArs / exchange.conversion_rates.BRL) * 1.02).toFixed(2) },
+        { nombre: "🇨🇱 🪙 PESO CHILENO", compra: (usdToArs / exchange.conversion_rates.CLP).toFixed(2), venta: ((usdToArs / exchange.conversion_rates.CLP) * 1.02).toFixed(2) },
+        { nombre: "🇺🇾 🪙 PESO URUGUAYO", compra: (usdToArs / exchange.conversion_rates.UYU).toFixed(2), venta: ((usdToArs / exchange.conversion_rates.UYU) * 1.02).toFixed(2) },
+        { nombre: "🇯🇵 💴 YEN JAPONÉS", compra: (usdToArs / exchange.conversion_rates.JPY).toFixed(2), venta: ((usdToArs / exchange.conversion_rates.JPY) * 1.02).toFixed(2) },
+      ];
+
+      const ticker = document.getElementById("tickerContenido");
+      if (!ticker) return;
+
+      const contenido = items.map(item => `
+  <span class="ticker-item">
+    ${item.nombre} — Compra: <span>$${item.compra}</span> | Venta: <span>$${item.venta}</span>
+  </span>
+`).join("&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;");
+
+ticker.innerHTML = `
+  <span class="ticker-loop">${contenido}</span>
+  <span class="ticker-loop">${contenido}</span>
+`;
+
+    })
+    .catch(() => {
+      const ticker = document.getElementById("tickerContenido");
+      if (ticker) ticker.textContent = "No se pudo cargar la cotización.";
+    });
+}
+
+cargarTicker();

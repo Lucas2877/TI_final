@@ -1,5 +1,5 @@
 function cerrarSesion() {
-  localStorage.removeItem("token");
+  sessionStorage.removeItem("token");
   window.location.href = "index.html";
 }
 let botonOscuro = document.getElementById("bot-oscuro");
@@ -51,7 +51,7 @@ const email = document.getElementById("email");
 const foto = document.getElementById("foto");
 
 // Cuando arranca la página, ¿hay un token guardado?
-const tokenGuardado = localStorage.getItem("token");
+const tokenGuardado = sessionStorage.getItem("token");
 
 if (tokenGuardado) {
   obtenerDatosDelUsuario(tokenGuardado);
@@ -89,7 +89,7 @@ if (btnLogin) {
 
         console.log("Respuesta del login:", data);
 
-        localStorage.setItem("token", data.accessToken);
+        sessionStorage.setItem("token", data.accessToken);
 
         window.location.href = "admin.html";
       })
@@ -130,7 +130,7 @@ function obtenerDatosDelUsuario(token) {
 
     .catch(function (error) {
       console.log("Error:", error.message);
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     });
 }
 
@@ -169,7 +169,7 @@ if (btnLoguearse) {
   });
 }
 
-const tokenIndex = localStorage.getItem("token");
+const tokenIndex = sessionStorage.getItem("token");
 
 // Por defecto, asumimos que NO hay sesión
 if (saludoUsuario) saludoUsuario.hidden = true;
@@ -193,7 +193,7 @@ if (tokenIndex && btnLoguearse && saludoUsuario && btnCerrarSesionIndex) {
       nombreUsuario.textContent = data.firstName;
     })
     .catch(function () {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       saludoUsuario.hidden = true;
       btnCerrarSesionIndex.hidden = true;
       btnLoguearse.hidden = false;
@@ -416,7 +416,7 @@ if (linkAdmin) {
 
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (token) {
       window.location.href = "admin.html";

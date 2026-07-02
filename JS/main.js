@@ -285,9 +285,25 @@ const noticiasFijas = [
   {
     titulo: "EEUU alertó sobre un \"golpe de Estado en marcha\" en Bolivia impulsado por sectores ligados al crimen organizado",
     imagen: "https://www.infobae.com/resizer/v2/NNHGH34EWVE7JNI5PWQ2B35V3E.JPG?auth=ae65c55ea24f0a44e0c7a053df95de08a762e94db9c88a519ca4fe0a0616e10e&smart=true&width=992&height=660&quality=85",
-    descripcion: "El vicesecretario de Estado estadounidense, Christopher Landau, respaldó al presidente Rodrigo Paz frente a las protestas y denunció que fuerzas “antiinstitucionales” buscan desestabilizar al país"
+    descripcion: "El vicesecretario del Estado estadounidense, Christopher Landau, respaldó al presidente Rodrigo Paz frente a las protestas y denunció que fuerzas “antiinstitucionales” buscan desestabilizar al país"
   }
 ];
+
+function toggleDescripcion(article)
+ {  console.log("toggle ejecutado", article);
+    const descripcion = article.querySelector(".descripcion");
+    const leerMas = article.querySelector(".leer-mas");
+
+    descripcion.classList.toggle("oculta");
+
+    if (descripcion.classList.contains("oculta")) {
+        leerMas.textContent = "Leer más ▼";
+    } else {
+        leerMas.textContent = "Leer menos ▲";
+    }
+}
+
+window.toggleDescripcion = toggleDescripcion
 
 function mostrarNoticiasIndex() {
 
@@ -302,15 +318,15 @@ function mostrarNoticiasIndex() {
     let todasLasNoticias = noticiasFijas.concat(noticiasGuardadas);
 
     todasLasNoticias.forEach(function(noticia) {
-
-        contenedor.innerHTML += `
-            <article>
-                <h2>${noticia.titulo}</h2>
-                <img src="${noticia.imagen}">
-                <p>${noticia.descripcion}</p>
-            </article>
-        `;
-    });
+    contenedor.innerHTML += `
+        <article onclick="toggleDescripcion(this)">
+            <h2>${noticia.titulo}</h2>
+            <img src="${noticia.imagen}">
+            <p class="descripcion oculta">${noticia.descripcion}</p>
+            <span class="leer-mas">Leer más ▼</span>
+        </article>
+    `;
+});
 }
 
 mostrarNoticiasIndex();
@@ -330,6 +346,7 @@ let noticiaEnEdicion = null;
 
 window.editarNoticia = editarNoticia;
 window.eliminarNoticia = eliminarNoticia;
+
 
   const formNoticia = document.getElementById("formNoticia");
 
@@ -453,3 +470,17 @@ ticker.innerHTML = `
 }
 
 cargarTicker();
+
+const formContacto = document.getElementById("formContacto");
+
+if (formContacto) {
+  formContacto.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    document.getElementById("contactoNombre").value = "";
+    document.getElementById("contactoEmail").value = "";
+    document.getElementById("contactoMensaje").value = "";
+    document.getElementById("mensajeContacto").textContent = "¡Mensaje enviado! Gracias por contactarnos.";
+    document.getElementById("mensajeContacto").style.color = "#4cd964";
+  });
+}

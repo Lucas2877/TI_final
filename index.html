@@ -14,6 +14,7 @@
   <nav>
   <a href="index.html">Inicio</a>
   <a href="admin.html" id="linkAdmin">Administrador</a>
+  <a href="#Contacto">Contacto</a>
   <button type="button" id = "bot-oscuro">🌚</button>
   <span id="saludoUsuario" hidden>👤 Hola, <b id="nombreUsuario"></b></span>
   <button id="btnLoguearse">iniciar sesión</button>
@@ -31,25 +32,39 @@
   <main>
     <div id="noticiasNuevas"></div>
   </main> 
-    <script src="JS/main.js"></script>
 
 </body>
-<footer class="footer">
+<footer class="footer" id="Contacto">
 
   <div class="footer-columna">
     <h3>📰 Portal de Noticias</h3>
     <p>Información actualizada sobre economía, deportes y actualidad.</p>
   </div>
+
   <div class="footer-columna">
     <h3>📞 Contacto</h3>
     <p>+54 9 3462 34 9293</p>
     <p>portalnoticias@gmail.com</p>
   </div>
+
+  <div class="footer-columna">
+  <h3>✉️ Escribinos</h3>
+  <form id="formContacto">
+    <input type="text" id="contactoNombre" placeholder="Tu nombre" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
+    <input type="email" id="contactoEmail" placeholder="Tu email" required>
+    <input type="text" id="contactoMensaje" placeholder="Tu mensaje" required>
+    <button type="submit">Enviar</button>
+    <p id="mensajeContacto"></p>
+  </form>
+</div>
+
 </footer>
 
 <div class="footer-copy">
   ©️ 2025 Portal de Noticias - Todos los derechos reservados
 </div>
+
+<script src="JS/main.js"></script>
 
 </html>
  

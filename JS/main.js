@@ -302,6 +302,16 @@ function toggleDescripcion(article)
         leerMas.textContent = "Leer menos ▲";
     }
 }
+function abrirImagen(src, descripcion) {
+  const overlay = document.createElement("div");
+  overlay.id = "imagenOverlay";
+  overlay.innerHTML = `<img src="${src}"><p>${descripcion}</p>`;
+  overlay.addEventListener("click", function() {
+    document.body.removeChild(overlay);
+  });
+  document.body.appendChild(overlay);
+}
+window.abrirImagen = abrirImagen;
 
 window.toggleDescripcion = toggleDescripcion
 
@@ -321,7 +331,7 @@ function mostrarNoticiasIndex() {
     contenedor.innerHTML += `
         <article onclick="toggleDescripcion(this)">
             <h2>${noticia.titulo}</h2>
-            <img src="${noticia.imagen}">
+            <img src="${noticia.imagen}" onclick="abrirImagen('${noticia.imagen}', '${noticia.descripcion}')">
             <p class="descripcion oculta">${noticia.descripcion}</p>
             <span class="leer-mas">Leer más ▼</span>
         </article>

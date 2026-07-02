@@ -13,18 +13,16 @@
 
 <body>
 
-    <h1>Panel de Administrador</h1>
-    <button type="button" id="bot-oscuro">🌚</button>
-    <a href="index.html" class="btn-volver">
-        Volver al inicio
-    </a>
+  <header class="admin-header">
+    <a href="index.html" class="btn-volver">Volver al inicio</a>
+    <div class="admin-header-acciones">
+       <button id="btnCerrarSesion">Cerrar sesión</button>
+       <button type="button" id="bot-oscuro">🌚</button>
+    </div>
+</header>
 
-    <button id="btnCerrarSesion">
-        Cerrar sesión
-    </button>
-
-    <hr>
-
+<h1>Panel de Administrador</h1>
+<section id="formSection">
     <h2>Agregar noticia</h2>
 
     <form id="formNoticia">
@@ -65,6 +63,7 @@
     
     </form>
     
+</section>
     <hr>
 
     <h2>Noticias cargadas</h2>

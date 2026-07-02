@@ -11,16 +11,20 @@
    
 </head>
 <body> 
-  <nav>
-  <a href="index.html">Inicio</a>
-  <a href="admin.html" id="linkAdmin">Administrador</a>
-  <a href="#Contacto">Contacto</a>
-  <button type="button" id = "bot-oscuro">🌚</button>
-  <span id="saludoUsuario" hidden>👤 Hola, <b id="nombreUsuario"></b></span>
-  <button id="btnLoguearse">iniciar sesión</button>
-  <button id="btnCerrarSesionIndex" hidden>Cerrar sesión</button>
+<nav>
+  <span></span>
+  <menu class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="admin.html" id="linkAdmin">Administrador</a>
+    <a href="#Contacto">Contacto</a>
+  </menu>
+  <menu class="nav-acciones">
+    <span id="saludoUsuario" hidden>👤 Hola, <b id="nombreUsuario"></b></span>
+    <button id="btnLoguearse">iniciar sesión</button>
+    <button id="btnCerrarSesionIndex" hidden>Cerrar sesión</button>
+    <button type="button" id="bot-oscuro">🌚</button>
+  </menu>
 </nav>
-
 <section class="ticker-wrapper">
   <p class="ticker-contenido" id="tickerContenido">
     Cargando cotizaciones...
